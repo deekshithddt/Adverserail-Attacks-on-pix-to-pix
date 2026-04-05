@@ -3,6 +3,7 @@ __pycache__/
 .gradio/
 .dist/
 fgsm_outputs/
+FS2K/
 *.pyc
 *.pyo
 *.pyd
