@@ -31,6 +31,7 @@ Adversarial-Attacks-on-pix-to-pix/
 |-- predict_pix2pix.py
 |-- gradio_predict.py
 |-- gradio_attack_pix2pix.py
+|-- gradio_export_adv.py
 |-- pix2pix_sketch_G.pth
 |-- pixtopix (1).ipynb
 |-- test.jpg
@@ -83,8 +84,12 @@ It is designed to show:
 - CW output
 - simple distortion metrics such as MSE, PSNR, and SSIM
 
-Note:
-This file imports attack utilities from `fgsm_attack_pix2pix.py`. That file is not currently present in this repo snapshot, so the attack UI depends on restoring or adding that script.
+### `gradio_export_adv.py`
+
+This file launches a dedicated Gradio app to generate and download raw adversarial examples for all attacks simultaneously. It is designed to export the raw, uncompressed grayscale adversarial image.
+This is particularly important because web browsers often inadvertently destroy microscopic adversarial noise through image compression when uploading photos directly to web UIs.
+
+*(Note: All attack utilities depend on `fgsm_attack_pix2pix.py`, which contains the zero-gradient trap fix allowing the math to escape a local minimum when the input and target are identical).*
 
 ### `pix2pix_sketch_G.pth`
 
@@ -204,8 +209,18 @@ This opens a browser-based interface where you can upload an image and generate 
 python gradio_attack_pix2pix.py
 ```
 
-Important:
-This app currently expects `fgsm_attack_pix2pix.py` to exist in the project. If that file is missing, the attack interface will not start successfully.
+### 4. Export pure adversarial images
+
+```bash
+python gradio_export_adv.py
+```
+
+This app produces downloadable adversarial images. 
+**Note on Web Browsers:** When using web interfaces (like Gradio), browsers often compress uploaded images automatically. This compression accidentally destroys the delicate adversarial noise! To truly test the attacked image, you must download it from this export app and run it directly through the terminal to bypass browser compression:
+
+```bash
+python predict_pix2pix.py --input <downloaded_adv_image>.png --show
+```
 
 ## Output Files
 
@@ -225,11 +240,7 @@ At the moment, the repository includes:
 
 The `FS2K` dataset is not part of the GitHub-tracked project contents.
 
-There is also one missing dependency file for the attack workflow:
-
-- `fgsm_attack_pix2pix.py`
-
-If you want the adversarial attack interface to be fully reproducible from this repository alone, that script should be added back.
+The adversarial attack interface is fully implemented and reproducible, with all attack methods (FGSM, PGD, DeepFool, CW) safely contained in `fgsm_attack_pix2pix.py`.
 
 ## Summary
 
