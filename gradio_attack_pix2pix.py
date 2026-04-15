@@ -284,6 +284,7 @@ with gr.Blocks(title="Sketch Generator Attack", css=custom_css) as demo:
             type="numpy",
             label="Upload Image",
             height=DISPLAY_HEIGHT,
+            sources=["upload", "webcam", "clipboard"],
         )
         clean_img = gr.Image(type="numpy", label="Sketch Output (Clean)", height=DISPLAY_HEIGHT)
         fgsm_img = gr.Image(type="numpy", label="FGSM Output", height=DISPLAY_HEIGHT)

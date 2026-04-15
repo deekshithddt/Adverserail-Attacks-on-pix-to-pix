@@ -77,7 +77,7 @@ with gr.Blocks(title="Adversarial Image Exporter", css=custom_css) as demo:
     gr.Markdown("<p style='text-align: center;'>Upload an image to simultaneously generate all 4 <b>adversarial images</b>. Hover over any of the corrupted Grayscale photos and click the download icon to save it for your demonstrations.</p>")
 
     with gr.Row():
-        upload_img = gr.Image(type="numpy", label="Upload Image")
+        upload_img = gr.Image(type="numpy", label="Upload Image", sources=["upload", "webcam", "clipboard"])
         with gr.Column():
             gr.Markdown("### Attack Settings")
             epsilon = gr.Slider(1, 128, value=32, step=1, label="Epsilon (Strength) /255")

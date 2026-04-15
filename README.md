@@ -252,3 +252,14 @@ It is useful for:
 - testing robustness of generative models
 - comparing clean and adversarial outputs
 - demonstrating attack methods on image-to-image networks
+
+
+
+
+
+
+
+
+
+COMMANDS 
+python predict_pix2pix.py --input hacked_image.png --show

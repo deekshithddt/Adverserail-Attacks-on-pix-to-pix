@@ -90,6 +90,7 @@ with gr.Blocks(title="Image to Sketch Generator", css=custom_css) as demo:
             label="Input Image",
             height=DISPLAY_HEIGHT,
             elem_id="input_panel",
+            sources=["upload", "webcam", "clipboard"],
         )
         output_img = gr.Image(
             type="numpy",
